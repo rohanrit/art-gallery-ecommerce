@@ -18,7 +18,10 @@ export function ProductCard({ product }: ProductCardProps) {
   const hasDiscount = product.compareAt && product.compareAt > product.price;
 
   return (
-    <div className="group relative bg-white overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+    <a
+      href={`/products/${product.slug}`}
+      className="group block bg-white overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+    >
       <div className="aspect-[3/4] relative overflow-hidden bg-cream">
         {product.images[0] ? (
           <img
@@ -64,6 +67,6 @@ export function ProductCard({ product }: ProductCardProps) {
           )}
         </div>
       </div>
-    </div>
+    </a>
   );
 }

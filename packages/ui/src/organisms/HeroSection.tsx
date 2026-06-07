@@ -1,12 +1,13 @@
-import React from 'react';
-import { Button } from '../atoms/Button';
+'use client';
+import React, { useState, useEffect, useCallback } from 'react';
 
 interface HeroSectionProps {
   title: string;
   subtitle?: string;
   ctaText?: string;
   ctaHref?: string;
-  backgroundImage?: string;
+  backgroundImages?: string[];
+  autoPlayInterval?: number;
 }
 
 export function HeroSection({
@@ -14,16 +15,35 @@ export function HeroSection({
   subtitle,
   ctaText = 'Shop Now',
   ctaHref = '/new-arrivals',
-  backgroundImage,
+  backgroundImages,
+  autoPlayInterval = 5000,
 }: HeroSectionProps) {
+  const hasSlider = backgroundImages && backgroundImages.length > 0;
+  const [current, setCurrent] = useState(0);
+
+  const next = useCallback(() => {
+    if (!hasSlider) return;
+    setCurrent((prev) => (prev + 1) % backgroundImages.length);
+  }, [hasSlider, backgroundImages?.length]);
+
+  useEffect(() => {
+    if (!hasSlider || backgroundImages.length < 2) return;
+    const id = setInterval(next, autoPlayInterval);
+    return () => clearInterval(id);
+  }, [hasSlider, backgroundImages?.length, autoPlayInterval, next]);
+
   return (
     <section className="relative w-full h-[70vh] min-h-[500px] max-h-[800px] overflow-hidden bg-charcoal">
-      {backgroundImage ? (
-        <img
-          src={backgroundImage}
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover"
-        />
+      {hasSlider ? (
+        backgroundImages.map((src, i) => (
+          <img
+            key={i}
+            src={src}
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-1000"
+            style={{ opacity: i === current ? 1 : 0 }}
+          />
+        ))
       ) : (
         <div className="absolute inset-0 bg-gradient-to-br from-charcoal via-charcoal/95 to-primary/30" />
       )}
@@ -40,12 +60,28 @@ export function HeroSection({
           </p>
         )}
         <div className="mt-8 sm:mt-10">
-          <a href={ctaHref}>
-            <Button variant="primary" size="lg" className="bg-white text-charcoal hover:bg-white/90">
-              {ctaText}
-            </Button>
+          <a
+            href={ctaHref}
+            className="inline-block px-6 py-2 bg-white text-charcoal text-sm uppercase tracking-wider font-medium transition-all duration-300 hover:bg-charcoal hover:text-white"
+          >
+            {ctaText}
           </a>
         </div>
+
+        {hasSlider && backgroundImages.length > 1 && (
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+            {backgroundImages.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrent(i)}
+                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                  i === current ? 'bg-white w-6' : 'bg-white/50 hover:bg-white/80'
+                }`}
+                aria-label={`Go to slide ${i + 1}`}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

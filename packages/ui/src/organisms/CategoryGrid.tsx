@@ -4,15 +4,24 @@ interface Category {
   id: string;
   name: string;
   slug: string;
-  image?: string | null;
+  images: string[];
+}
+
+interface DiscountBlock {
+  title: string;
+  description?: string;
+  ctaText?: string;
+  ctaHref?: string;
+  backgroundImage?: string;
 }
 
 interface CategoryGridProps {
   categories: Category[];
   title?: string;
+  discount?: DiscountBlock;
 }
 
-export function CategoryGrid({ categories, title }: CategoryGridProps) {
+export function CategoryGrid({ categories, title, discount }: CategoryGridProps) {
   return (
     <section className="py-12 sm:py-16 lg:py-20 bg-cream">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -37,12 +46,17 @@ export function CategoryGrid({ categories, title }: CategoryGridProps) {
                 }`}
                 style={{ minHeight: index === 0 ? '480px' : '220px' }}
               >
-                {category.image ? (
-                  <img
-                    src={category.image}
-                    alt={category.name}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
+                {category.images && category.images.length > 0 ? (
+                  <div className="w-full h-full overflow-x-auto snap-x snap-mandatory">
+                    {category.images.map((img, imgIdx) => (
+                      <img
+                        key={imgIdx}
+                        src={img}
+                        alt={`${category.name} ${imgIdx + 1}`}
+                        className="w-full h-full object-cover snap-center shrink-0 transition-transform duration-500 group-hover:scale-105"
+                      />
+                    ))}
+                  </div>
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-charcoal/10">
                     <span className="font-serif text-3xl text-white/20">{category.name}</span>
@@ -59,6 +73,37 @@ export function CategoryGrid({ categories, title }: CategoryGridProps) {
                 </div>
               </a>
             ))}
+
+            {discount && (
+              <a
+                href={discount.ctaHref || '/sale'}
+                className="relative overflow-hidden col-span-1 sm:col-span-2 lg:col-span-2 flex items-center justify-center p-8 sm:p-12 min-h-[220px] group"
+                style={
+                  discount.backgroundImage
+                    ? {
+                        backgroundImage: `url(${discount.backgroundImage})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                      }
+                    : undefined
+                }
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/90 to-charcoal/90" />
+                <div className="relative text-center">
+                  <p className="font-serif text-3xl sm:text-4xl lg:text-5xl text-white mb-2">
+                    {discount.title}
+                  </p>
+                  {discount.description && (
+                    <p className="text-white/80 text-base sm:text-lg mb-4">
+                      {discount.description}
+                    </p>
+                  )}
+                  <span className="inline-block px-6 py-2 bg-white text-charcoal text-sm uppercase tracking-wider font-medium transition-all duration-300 group-hover:bg-charcoal group-hover:text-white">
+                    {discount.ctaText || 'Shop Sale'}
+                  </span>
+                </div>
+              </a>
+            )}
           </div>
         )}
       </div>

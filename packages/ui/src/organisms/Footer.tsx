@@ -1,3 +1,4 @@
+"use client";
 import React from 'react';
 
 const footerColumns = [
@@ -15,7 +16,7 @@ const footerColumns = [
   {
     title: 'About',
     links: [
-      { label: 'Our Story', href: '/about' },
+      { label: 'Our Story', href: '/our-story' },
       { label: 'Sustainability', href: '/sustainability' },
       { label: 'Careers', href: '/careers' },
       { label: 'Press', href: '/press' },
@@ -25,7 +26,7 @@ const footerColumns = [
     title: 'Support',
     links: [
       { label: 'Contact Us', href: '/contact' },
-      { label: 'Shipping & Returns', href: '/shipping' },
+      { label: 'Shipping & Returns', href: '/shipping-returns' },
       { label: 'Size Guide', href: '/size-guide' },
       { label: 'FAQ', href: '/faq' },
     ],
@@ -33,14 +34,30 @@ const footerColumns = [
   {
     title: 'Legal',
     links: [
-      { label: 'Privacy Policy', href: '/privacy' },
-      { label: 'Terms of Service', href: '/terms' },
-      { label: 'Cookie Policy', href: '/cookies' },
+      { label: 'Privacy Policy', href: '/privacy-policy' },
+      { label: 'Terms of Service', href: '/terms-of-service' },
+      { label: 'Cookie Policy', href: '/cookie-policy' },
     ],
   },
 ];
 
 export function Footer() {
+  const handleClearCache = () => {
+    localStorage.clear();
+    sessionStorage.clear();
+    document.cookie.split(";").forEach((cookie) => {
+      document.cookie = cookie
+        .replace(/^ +/, "")
+        .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+    });
+    if ('caches' in window) {
+      caches.keys().then((names) => {
+        for (let name of names) caches.delete(name);
+      });
+    }
+    window.location.reload();
+  };
+
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -59,6 +76,16 @@ export function Footer() {
                     </a>
                   </li>
                 ))}
+                {column.title === 'Legal' && (
+                  <li>
+                    <button
+                      onClick={handleClearCache}
+                      className="text-sm text-primary-foreground/50 hover:text-primary-foreground transition-colors duration-200 underline underline-offset-4"
+                    >
+                      Clear Cache
+                    </button>
+                  </li>
+                )}
               </ul>
             </div>
           ))}

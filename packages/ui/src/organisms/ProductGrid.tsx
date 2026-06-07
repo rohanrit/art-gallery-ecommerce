@@ -15,9 +15,10 @@ interface ProductGridProps {
   title: string;
   products: Product[];
   columns?: 3 | 4;
+  viewAllHref?: string;
 }
 
-export function ProductGrid({ title, products, columns = 4 }: ProductGridProps) {
+export function ProductGrid({ title, products, columns = 4, viewAllHref }: ProductGridProps) {
   const gridCols = columns === 4
     ? 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4'
     : 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-3';
@@ -29,12 +30,14 @@ export function ProductGrid({ title, products, columns = 4 }: ProductGridProps) 
           <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-charcoal">
             {title}
           </h2>
-          <a
-            href="/new-arrivals"
-            className="text-sm text-charcoal/60 hover:text-primary transition-colors uppercase tracking-wider"
-          >
-            View All
-          </a>
+          {viewAllHref && (
+            <a
+              href={viewAllHref}
+              className="text-sm text-charcoal/60 hover:text-primary transition-colors uppercase tracking-wider"
+            >
+              View All
+            </a>
+          )}
         </div>
 
         {products.length === 0 ? (

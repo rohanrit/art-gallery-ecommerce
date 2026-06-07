@@ -1,17 +1,22 @@
 # art-gallery-ecommerce
 An E-Commerce app buld with Next.js (App Router), TypeScript, Tailwind CSS, Node.js (NestJS), PostgreSQL, and Redis
 
-# Web app
+### Web app
 ```
 pnpm --filter @alignartistry/web dev
 ```
 
-# Auth service (needs PostgreSQL running)
+### Auth service (needs PostgreSQL running)
 ```
 pnpm --filter @alignartistry/auth-service dev
 ```
 
-# Both together
+### Both together
 ```
 pnpm dev
 ```
+
+### Removes the .next build cache.
+- npm run clean
+
+
