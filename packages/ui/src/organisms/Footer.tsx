@@ -42,22 +42,6 @@ const footerColumns = [
 ];
 
 export function Footer() {
-  const handleClearCache = () => {
-    localStorage.clear();
-    sessionStorage.clear();
-    document.cookie.split(";").forEach((cookie) => {
-      document.cookie = cookie
-        .replace(/^ +/, "")
-        .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
-    });
-    if ('caches' in window) {
-      caches.keys().then((names) => {
-        for (let name of names) caches.delete(name);
-      });
-    }
-    window.location.reload();
-  };
-
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -70,22 +54,12 @@ export function Footer() {
                   <li key={link.href}>
                     <a
                       href={link.href}
-                      className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors duration-200"
+                      className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-all duration-200 hover:translate-x-0.5 inline-block"
                     >
                       {link.label}
                     </a>
                   </li>
                 ))}
-                {column.title === 'Legal' && (
-                  <li>
-                    <button
-                      onClick={handleClearCache}
-                      className="text-sm text-primary-foreground/50 hover:text-primary-foreground transition-colors duration-200 underline underline-offset-4"
-                    >
-                      Clear Cache
-                    </button>
-                  </li>
-                )}
               </ul>
             </div>
           ))}

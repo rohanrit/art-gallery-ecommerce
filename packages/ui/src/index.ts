@@ -1,4 +1,5 @@
 export { Button } from './atoms/Button';
+export { FadeIn } from './atoms/FadeIn';
 export { Input } from './atoms/Input';
 export { ProductCard } from './molecules/ProductCard';
 export { Navbar } from './organisms/Navbar';

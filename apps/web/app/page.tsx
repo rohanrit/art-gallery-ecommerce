@@ -1,46 +1,30 @@
 import React from 'react';
-import { Navbar, Footer, HeroSection, CategoryGrid, ProductGrid } from '@alignartistry/ui';
+import { Navbar, Footer, FadeIn, HeroSection, CategoryGrid, ProductGrid } from '@alignartistry/ui';
 
 const sampleCategories = [
-  { 
-    id: '1', 
-    name: 'Dresses', 
-    slug: 'dresses', 
-    images: [
-      'https://loremflickr.com/800/1000/dress,fashion', 
-      'https://loremflickr.com/800/1000/gown,fashion', 
-      'https://loremflickr.com/800/1000/cocktail-dress,fashion'
-    ] 
+  {
+    id: '1',
+    name: 'Dresses',
+    slug: 'dresses',
+    images: ['/pexels-innamykytas-9617684.jpg'],
   },
-  { 
-    id: '2', 
-    name: 'Shoes', 
-    slug: 'shoes', 
-    images: [
-      'https://loremflickr.com/800/1000/shoes,fashion', 
-      'https://loremflickr.com/800/1000/heels,fashion', 
-      'https://loremflickr.com/800/1000/boots,fashion'
-    ] 
+  {
+    id: '2',
+    name: 'Shoes',
+    slug: 'shoes',
+    images: ['/pexels-diego-fioravanti-1869704070-31849138.jpg'],
   },
-  { 
-    id: '3', 
-    name: 'Vintage', 
-    slug: 'vintage', 
-    images: [
-      'https://loremflickr.com/800/1000/vintage,fashion', 
-      'https://loremflickr.com/800/1000/retro,fashion', 
-      'https://loremflickr.com/800/1000/antique,fashion'
-    ] 
+  {
+    id: '3',
+    name: 'Vintage',
+    slug: 'vintage',
+    images: ['/pexels-olga-mezina-2155319573-36755308.jpg'],
   },
-  { 
-    id: '4', 
-    name: 'Accessories', 
-    slug: 'accessories', 
-    images: [
-      'https://loremflickr.com/800/1000/accessories,fashion', 
-      'https://loremflickr.com/800/1000/jewelry,fashion', 
-      'https://loremflickr.com/800/1000/handbag,fashion'
-    ] 
+  {
+    id: '4',
+    name: 'Accessories',
+    slug: 'accessories',
+    images: ['/pexels-vika-glitter-392079-35884659.jpg'],
   },
 ];
 
@@ -67,27 +51,32 @@ export default function HomePage() {
           ctaText="Explore New Arrivals"
           ctaHref="/new-arrivals"
           backgroundImages={[
-            'https://loremflickr.com/1600/900/fashion,model',
-            'https://loremflickr.com/1600/900/clothing,style',
-            'https://loremflickr.com/1600/900/vintage,fashion',
+            '/hero-banner.webp',
+            '/hero-banner.webp',
+            '/hero-banner.webp',
           ]}
         />
 
-        <CategoryGrid
-          categories={sampleCategories}
-          title="Shop by Category"
-          discount={{
-            title: 'Up to 40% Off',
-            description: 'Limited time offer on select vintage pieces.',
-            ctaText: 'Shop the Sale',
-            ctaHref: '/sale',
-            backgroundImage: '/discount-bg.webp',
-          }}
-        />
+        <FadeIn>
+          <CategoryGrid
+            categories={sampleCategories}
+            title="Shop by Category"
+            discount={{
+              title: 'Up to 40% Off',
+              description: 'Limited time offer on select vintage pieces.',
+              ctaText: 'Shop the Sale',
+              ctaHref: '/sale',
+              backgroundImage: '/discount-bg.webp',
+            }}
+          />
+        </FadeIn>
 
-        <ProductGrid title="New Arrivals" products={sampleProducts} viewAllHref="/new-arrivals" />
+        <FadeIn variant="fade-in-left">
+          <ProductGrid title="New Arrivals" products={sampleProducts} viewAllHref="/new-arrivals" />
+        </FadeIn>
 
-        <section className="py-16 sm:py-20 bg-primary text-primary-foreground">
+        <FadeIn>
+          <section className="py-16 sm:py-20 bg-primary text-primary-foreground">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl mb-4">
               Timeless Design, Naturally
@@ -105,8 +94,11 @@ export default function HomePage() {
             </a>
           </div>
         </section>
+        </FadeIn>
 
-        <ProductGrid title="Featured Products" products={sampleProducts.slice(0, 4)} columns={4} />
+        <FadeIn variant="fade-in-right">
+          <ProductGrid title="Featured Products" products={sampleProducts.slice(0, 4)} columns={4} />
+        </FadeIn>
       </main>
 
       <Footer />
