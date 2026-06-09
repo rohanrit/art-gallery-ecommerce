@@ -40,29 +40,29 @@ export function HeroSection({
             key={i}
             src={src}
             alt=""
-            className="absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-1000"
-            style={{ opacity: i === current ? 1 : 0 }}
+            className="absolute inset-0 w-full h-full object-cover object-top transition-all duration-1000 ease-in-out"
+            style={{ opacity: i === current ? 1 : 0, transform: i === current ? 'scale(1)' : 'scale(1.05)' }}
           />
         ))
       ) : (
         <div className="absolute inset-0 bg-gradient-to-br from-charcoal via-charcoal/95 to-primary/30" />
       )}
 
-      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent" />
 
       <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center items-center text-center">
-        <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-tight max-w-4xl">
+        <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-tight max-w-4xl animate-fadeInUp">
           {title}
         </h1>
         {subtitle && (
-          <p className="mt-4 sm:mt-6 text-base sm:text-lg text-white/80 max-w-xl">
+          <p className="mt-4 sm:mt-6 text-base sm:text-lg text-white/80 max-w-xl animate-fadeInUp" style={{ animationDelay: '0.15s' }}>
             {subtitle}
           </p>
         )}
-        <div className="mt-8 sm:mt-10">
+        <div className="mt-8 sm:mt-10 animate-fadeInUp" style={{ animationDelay: '0.3s' }}>
           <a
             href={ctaHref}
-            className="inline-block px-6 py-2 bg-white text-charcoal text-sm uppercase tracking-wider font-medium transition-all duration-300 hover:bg-charcoal hover:text-white"
+            className="inline-block px-8 py-3 bg-white text-charcoal text-sm uppercase tracking-wider font-medium transition-all duration-300 hover:bg-charcoal hover:text-white shadow-lg hover:shadow-xl"
           >
             {ctaText}
           </a>

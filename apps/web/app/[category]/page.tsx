@@ -1,7 +1,12 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
-import { Navbar, Footer, ProductGrid } from '@alignartistry/ui';
+import { Navbar, Footer, FadeIn, ProductGrid } from '@alignartistry/ui';
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 import {
+
   getProductsByCategory,
   getCategoryBySlug,
   getAllCategorySlugs,
@@ -52,18 +57,22 @@ export default function CategoryPage({ params }: PageProps) {
     <>
       <Navbar />
       <main>
-        <section className="bg-cream py-12 sm:py-16 lg:py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-charcoal">
-              {displayName}
-            </h1>
-            <p className="mt-3 text-base sm:text-lg text-charcoal/60 max-w-xl mx-auto">
-              {description}
-            </p>
-          </div>
-        </section>
+        <FadeIn>
+          <section className="bg-cream py-12 sm:py-16 lg:py-20">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+              <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-charcoal">
+                {displayName}
+              </h1>
+              <p className="mt-3 text-base sm:text-lg text-charcoal/60 max-w-xl mx-auto">
+                {description}
+              </p>
+            </div>
+          </section>
+        </FadeIn>
 
-        <ProductGrid title="" products={filtered} />
+        <FadeIn>
+          <ProductGrid title="" products={filtered} />
+        </FadeIn>
       </main>
       <Footer />
     </>

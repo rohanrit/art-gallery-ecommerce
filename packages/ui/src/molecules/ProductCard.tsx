@@ -20,14 +20,14 @@ export function ProductCard({ product }: ProductCardProps) {
   return (
     <a
       href={`/products/${product.slug}`}
-      className="group block bg-white overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+      className="group block bg-white overflow-hidden rounded-lg shadow-sm shadow-black/5 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl"
     >
       <div className="aspect-[3/4] relative overflow-hidden bg-cream">
         {product.images[0] ? (
           <img
             src={product.images[0]}
             alt={product.name}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            className="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-charcoal/20">
@@ -38,15 +38,18 @@ export function ProductCard({ product }: ProductCardProps) {
         )}
 
         {product.isNew && (
-          <span className="absolute top-3 left-3 bg-primary text-primary-foreground text-xs font-semibold px-2.5 py-1">
+          <span className="absolute top-3 left-3 bg-primary text-primary-foreground text-xs font-semibold px-2.5 py-1 animate-pulse">
             New
           </span>
         )}
 
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500" />
+
         <button
           className="absolute bottom-3 left-3 right-3 bg-white/95 text-charcoal text-sm font-medium py-2.5
-                     opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0
-                     transition-all duration-300 hover:bg-primary hover:text-primary-foreground"
+                     opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0
+                     transition-all duration-400 ease-out hover:bg-primary hover:text-primary-foreground
+                     shadow-lg shadow-black/10"
         >
           Quick View
         </button>

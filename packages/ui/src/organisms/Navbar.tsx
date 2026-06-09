@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 const navLinks = [
   { label: 'New Arrivals', href: '/new-arrivals' },
@@ -13,9 +13,38 @@ const navLinks = [
 
 export function Navbar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const [atTop, setAtTop] = useState(true);
+
+  const handleScroll = useCallback(() => {
+    setAtTop(window.scrollY < 20);
+  }, []);
+
+  useEffect(() => {
+    let lastScroll = 0;
+
+    const onScroll = () => {
+      const current = window.scrollY;
+      setHidden(current > lastScroll && current > 100);
+      lastScroll = current;
+      handleScroll();
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [handleScroll]);
 
   return (
-    <header suppressHydrationWarning className="sticky top-0 z-50 bg-cream/95 backdrop-blur-sm border-b border-charcoal/10">
+    <header
+      suppressHydrationWarning
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        hidden ? '-translate-y-full' : 'translate-y-0'
+      } ${
+        atTop
+          ? 'bg-cream/80 backdrop-blur-lg'
+          : 'bg-cream/95 backdrop-blur-xl shadow-sm'
+      } border-b border-charcoal/10`}
+    >
       <div suppressHydrationWarning className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div suppressHydrationWarning className="flex items-center justify-between h-16 lg:h-20">
           <button
@@ -32,8 +61,8 @@ export function Navbar() {
             </svg>
           </button>
 
-          <a href="/" className="font-serif text-2xl lg:text-3xl text-primary tracking-tight">
-            AlignArtistry
+          <a href="/" className="flex items-center self-stretch py-1.5">
+            <img src="/aa-logo-01.png" alt="AlignArtistry" className="h-full w-auto object-contain" />
           </a>
 
           <nav className="hidden lg:flex items-center gap-8">
