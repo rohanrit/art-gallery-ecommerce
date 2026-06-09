@@ -13,6 +13,7 @@ pnpm --filter @alignartistry/auth-service dev
 
 ### Both together
 ```
+pnpm --filter @alignartistry/ui build
 pnpm dev
 ```
 

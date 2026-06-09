@@ -66,8 +66,8 @@ export function Footer() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-primary-foreground/20 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <a href="/" className="font-serif text-xl tracking-tight">
-            AlignArtistry
+          <a href="/" className="block">
+            <img src="/aa-logo-01.png" alt="AlignArtistry" className="h-7 w-auto" />
           </a>
           <div className="flex items-center gap-4">
             <a href="#" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors" aria-label="Instagram">

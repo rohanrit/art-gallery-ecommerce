@@ -1,30 +1,34 @@
 import React from 'react';
 import { Navbar, Footer, FadeIn, HeroSection, CategoryGrid, ProductGrid } from '@alignartistry/ui';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+
 const sampleCategories = [
   {
     id: '1',
     name: 'Dresses',
     slug: 'dresses',
-    images: ['/pexels-innamykytas-9617684.jpg'],
+    images: ['/pexels-vika-glitter-392079-35884659.jpg'],
   },
   {
     id: '2',
     name: 'Shoes',
     slug: 'shoes',
-    images: ['/pexels-diego-fioravanti-1869704070-31849138.jpg'],
+    images: ['/pexels-olga-mezina-2155319573-36755308.jpg'],
   },
   {
     id: '3',
     name: 'Vintage',
     slug: 'vintage',
-    images: ['/pexels-olga-mezina-2155319573-36755308.jpg'],
+    images: ['/pexels-innamykytas-9617684.jpg'],
   },
   {
     id: '4',
     name: 'Accessories',
     slug: 'accessories',
-    images: ['/pexels-vika-glitter-392079-35884659.jpg'],
+    images: ['/pexels-diego-fioravanti-1869704070-31849138.jpg'],
   },
 ];
 

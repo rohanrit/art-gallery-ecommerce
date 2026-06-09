@@ -1,7 +1,12 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
 import { Navbar, Footer, FadeIn, ProductGrid } from '@alignartistry/ui';
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 import { getProductBySlug, products } from '@/lib/data';
+
 
 interface PageProps {
   params: { slug: string };

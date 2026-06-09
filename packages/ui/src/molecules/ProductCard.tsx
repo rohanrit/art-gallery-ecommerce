@@ -20,7 +20,7 @@ export function ProductCard({ product }: ProductCardProps) {
   return (
     <a
       href={`/products/${product.slug}`}
-      className="group block bg-white overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-xl shadow-black/5"
+      className="group block bg-white overflow-hidden rounded-lg shadow-sm shadow-black/5 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl"
     >
       <div className="aspect-[3/4] relative overflow-hidden bg-cream">
         {product.images[0] ? (

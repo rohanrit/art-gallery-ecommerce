@@ -61,8 +61,8 @@ export function Navbar() {
             </svg>
           </button>
 
-          <a href="/" className="font-serif text-2xl lg:text-3xl text-primary tracking-tight">
-            AlignArtistry
+          <a href="/" className="flex items-center self-stretch py-1.5">
+            <img src="/aa-logo-01.png" alt="AlignArtistry" className="h-full w-auto object-contain" />
           </a>
 
           <nav className="hidden lg:flex items-center gap-8">
